@@ -1,0 +1,35 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    threeSum(nums) {
+        //sort the arr first
+        nums.sort((a,b) => a -b);
+        const result = [];
+
+        for(let i = 0;i < nums.length - 2;i++){
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
+
+            let l = i + 1;
+            let r = nums.length - 1;
+
+            while(l < r){
+                let sum = nums[i] + nums[r] + nums[l];
+
+                if(sum === 0){
+                    result.push([nums[i],nums[l],nums[r]]);
+                    r--;
+                    l++;
+                    while (l < r && nums[l] === nums[l - 1]) l++;
+                }else if(sum < 0){
+                    l++;
+                }else{
+                    r--;
+                }
+            }
+        }
+
+        return result;
+    }
+}
